@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SonaD — JavaScript Principal
+   Torodo Avenue — JavaScript Principal
    Boutique Mode Femme & Tissus — Dakar, Sénégal
    ========================================================================== */
 
@@ -133,7 +133,7 @@ function addToCart(productId) {
   }
 
   updateCartUI();
-  showToast(`✨ "${product.name}" ajouté au panier !`);
+  showToast(`Produit "${product.name}" ajouté au panier !`);
 }
 
 function updateCartUI() {
@@ -147,7 +147,7 @@ function updateCartUI() {
   if (cart.length === 0) {
     body.innerHTML = `
       <div class="cart-empty">
-        <div class="cart-empty-icon">🛍️</div>
+        <div class="cart-empty-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
         <p>Votre panier est vide.</p>
         <a href="#produits" class="btn btn-gold" onclick="closeCart()">Commencer vos Achats</a>
       </div>`;
@@ -176,7 +176,7 @@ function updateCartUI() {
 }
 
 function changeQty(id, delta) {
-  const item = cart.find(i => i.id === id);
+  const item = cart.find(i => id === i.id);
   if (!item) return;
   item.qty += delta;
   if (item.qty <= 0) removeFromCart(id);
@@ -230,6 +230,7 @@ let sliderInterval;
 function goToSlide(index) {
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.hero-dot');
+  if (!slides.length) return;
   slides[currentSlide].classList.remove('active');
   dots[currentSlide].classList.remove('active');
   currentSlide = (index + slides.length) % slides.length;
@@ -279,8 +280,12 @@ function createProductCard(product) {
   `;
 }
 
-document.getElementById('productsGrid').innerHTML = PRODUCTS.map(createProductCard).join('');
-document.getElementById('cheveuxGrid').innerHTML = CHEVEUX_PRODUCTS.map(createProductCard).join('');
+if (document.getElementById('productsGrid')) {
+  document.getElementById('productsGrid').innerHTML = PRODUCTS.map(createProductCard).join('');
+}
+if (document.getElementById('cheveuxGrid')) {
+  document.getElementById('cheveuxGrid').innerHTML = CHEVEUX_PRODUCTS.map(createProductCard).join('');
+}
 
 /* --------------------------------------------------------------------------
    Animation au Défilement (Intersection Observer)
@@ -305,6 +310,7 @@ document.querySelectorAll('.product-card, .collection-card, .testimonial-card, .
    -------------------------------------------------------------------------- */
 window.addEventListener('scroll', () => {
   const header = document.getElementById('mainHeader');
+  if (!header) return;
   if (window.scrollY > 80) {
     header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
   } else {
@@ -317,6 +323,7 @@ window.addEventListener('scroll', () => {
    -------------------------------------------------------------------------- */
 function showToast(message) {
   const toast = document.getElementById('toast');
+  if (!toast) return;
   toast.textContent = message;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 3500);
@@ -327,10 +334,12 @@ function showToast(message) {
    -------------------------------------------------------------------------- */
 function subscribeNewsletter(e) {
   e.preventDefault();
-  const email = document.getElementById('newsletterEmail').value;
+  const emailInput = document.getElementById('newsletterEmail');
+  if (!emailInput) return;
+  const email = emailInput.value;
   if (email) {
-    showToast(`💌 Bienvenue dans la communauté SonaD, ${email} !`);
-    document.getElementById('newsletterEmail').value = '';
+    showToast(`Bienvenue dans la communauté Torodo Avenue, ${email} !`);
+    emailInput.value = '';
   }
 }
 

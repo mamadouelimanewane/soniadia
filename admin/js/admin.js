@@ -1,13 +1,13 @@
 /* ==========================================================================
-   SonaD Admin — JavaScript
+   Torodo Avenue Admin — JavaScript
    Boutique Mode Femme & Tissus — Dakar, Sénégal
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    CONSTANTES & IDENTIFIANTS
    -------------------------------------------------------------------------- */
-const ADMIN_EMAIL = 'admin@sonad.sn';
-const ADMIN_PASSWORD = 'sonad2026';
+const ADMIN_EMAIL = 'admin@torodo.sn';
+const ADMIN_PASSWORD = 'torodo2026';
 
 const COLLECTION_LABELS = {
     robes: 'Robes & Caftans', wax: 'Tissus Wax', bazin: 'Bazin Riche',
@@ -54,7 +54,7 @@ function makeOrder(id, customerId, productId, status, daysAgo) {
     const p = SEED_PRODUCTS.find(x => x.id === productId);
     const d = new Date(); d.setDate(d.getDate() - daysAgo);
     return {
-        id, ref: `SD-${String(id).padStart(4, '0')}`,
+        id, ref: `TA-${String(id).padStart(4, '0')}`,
         customerId, customerName: c ? `${c.first} ${c.last}` : 'Inconnu',
         customerCountry: c ? c.country : '',
         productId, productName: p ? p.name : 'Produit', amount: p ? p.price : 0,
@@ -93,9 +93,9 @@ let confirmCallback = null;
 /* --------------------------------------------------------------------------
    STOCKAGE LOCAL
    -------------------------------------------------------------------------- */
-function save(key, data) { localStorage.setItem(`sd_admin_${key}`, JSON.stringify(data)); }
+function save(key, data) { localStorage.setItem(`ta_admin_${key}`, JSON.stringify(data)); }
 function load(key, seed) {
-    const raw = localStorage.getItem(`sd_admin_${key}`);
+    const raw = localStorage.getItem(`ta_admin_${key}`);
     if (raw) return JSON.parse(raw);
     save(key, seed);
     return seed;
@@ -115,18 +115,18 @@ const loginScreen = document.getElementById('loginScreen');
 const adminApp = document.getElementById('adminApp');
 
 function checkAuth() {
-    return sessionStorage.getItem('sd_admin_logged') === '1';
+    return sessionStorage.getItem('ta_admin_logged') === '1';
 }
 
 function login() {
-    sessionStorage.setItem('sd_admin_logged', '1');
+    sessionStorage.setItem('ta_admin_logged', '1');
     loginScreen.style.display = 'none';
     adminApp.style.display = 'flex';
     initAll();
 }
 
 function logout() {
-    sessionStorage.removeItem('sd_admin_logged');
+    sessionStorage.removeItem('ta_admin_logged');
     adminApp.style.display = 'none';
     loginScreen.style.display = 'flex';
 }

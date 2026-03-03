@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SooWigs Admin — Design System
+   Torodo Avenue Admin — Design System
    ========================================================================== */
 :root {
     --bg: #0F0F0F;
@@ -109,11 +109,11 @@ button {
     gap: 6px;
 }
 
-.logo-soo {
+.logo-torodo {
     color: var(--white);
 }
 
-.logo-wigs {
+.logo-avenue {
     color: var(--gold);
     font-style: italic;
 }
@@ -1267,7 +1267,6 @@ input:checked+.slider::before {
 /* ==========================================================================
    ORDER DETAIL MODAL
    ========================================================================== */
-.order-detail {}
 
 .order-detail-row {
     display: flex;

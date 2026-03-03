@@ -1,13 +1,13 @@
 /* ==========================================================================
-   SonaD Premium Design System — Mode Femme & Tissus — Dakar, Sénégal
+   Torodo Avenue Premium Design System — Mode Femme & Tissus — Dakar, Sénégal
    ========================================================================== */
 
 :root {
   /* Colors */
   --primary: #1A1A1A;
   /* Luxury Black */
-  --secondary: #D4AF37;
-  /* Gold Accent */
+  --secondary: #B8860B;
+  /* Darker Gold for contrast (WCAG) */
   --accent: #FDFBF8;
   /* Soft Cream */
   --text: #222222;
@@ -160,13 +160,16 @@ img {
   font-weight: 700;
 }
 
-.logo-sona {
+.logo-torodo {
   color: var(--primary);
+  font-weight: 300;
 }
 
-.logo-d {
+.logo-avenue {
   color: var(--secondary);
   font-style: italic;
+  font-weight: 700;
+  margin-left: -2px;
 }
 
 .nav {
@@ -462,6 +465,18 @@ img {
 
 .feature-icon {
   font-size: 1.8rem;
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon svg {
+  transition: var(--transition);
+}
+
+.feature-item:hover .feature-icon svg {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .feature-item strong {
@@ -1151,6 +1166,24 @@ img {
 
   .hamburger {
     display: flex;
+    order: -1;
+  }
+
+  .header-inner {
+    height: 70px;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .icon-btn svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
   }
 
   .hero-title {
