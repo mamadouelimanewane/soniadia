@@ -1,110 +1,111 @@
 /* ==========================================================================
-   SooWigs — Main JavaScript
+   SonaD — JavaScript Principal
+   Boutique Mode Femme & Tissus — Dakar, Sénégal
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   DATA — Products Catalogue
+   DONNÉES — Catalogue Produits
    -------------------------------------------------------------------------- */
 const PRODUCTS = [
   {
     id: 1,
-    name: 'Bone Straight 26" — Noir Jet',
-    price: 289,
-    badge: 'Bestseller',
-    img: 'assets/product_wig1.png',
-    collection: 'raw'
+    name: 'Robe Caftan Brodée — Élégance Dorée',
+    price: 35000,
+    badge: 'Meilleure Vente',
+    img: 'assets/collection_robes.png',
+    collection: 'robes'
   },
   {
     id: 2,
-    name: 'Balayage Wavy 20" — Miel',
-    price: 345,
+    name: 'Ensemble Wax — Motif Soleil de Dakar',
+    price: 22000,
     badge: 'Nouveau',
-    img: 'assets/product_wig2.png',
-    collection: 'balayage'
+    img: 'assets/collection_wax.png',
+    collection: 'wax'
   },
   {
     id: 3,
-    name: 'Indian Raw Bodywave 14" + 6x6 HD',
-    price: 320,
-    badge: '',
-    img: 'assets/collection_brown.png',
-    collection: 'indian'
+    name: 'Bazin Riche Brodé — Bleu Royal 6 yards',
+    price: 45000,
+    badge: 'Premium',
+    img: 'assets/collection_bazin.png',
+    collection: 'bazin'
   },
   {
     id: 4,
-    name: 'Caramel Brown Straight 18"',
-    price: 299,
+    name: 'Robe Longue Wax — Teranga',
+    price: 28000,
     badge: 'Tendance',
-    img: 'assets/collection_balayage.png',
-    collection: 'brown'
+    img: 'assets/product_robe1.png',
+    collection: 'robes'
   },
   {
     id: 5,
-    name: 'Vietnamese Single Donor 14" + 13x6',
-    price: 375,
+    name: 'Tissu Wax Hollandais — 6 yards Premium',
+    price: 18000,
     badge: '',
-    img: 'assets/hero_banner.png',
-    collection: 'vietnamese'
+    img: 'assets/collection_wax.png',
+    collection: 'wax'
   },
   {
     id: 6,
-    name: 'Coco Brown Body Wave 22"',
-    price: 265,
+    name: 'Jupe Crayon Wax — Motif Floral',
+    price: 15000,
     badge: 'Populaire',
-    img: 'assets/collection_raw.png',
-    collection: 'brown'
+    img: 'assets/hero_banner.png',
+    collection: 'robes'
   },
   {
     id: 7,
-    name: 'Blondie Balayage 20" Frontal',
-    price: 399,
+    name: 'Bazin Getzner Autrichien — Rose Poudré',
+    price: 55000,
     badge: 'Exclusif',
-    img: 'assets/product_wig2.png',
-    collection: 'balayage'
+    img: 'assets/collection_bazin.png',
+    collection: 'bazin'
   },
   {
     id: 8,
-    name: 'Raw Vietnamese 16" + 6x6 HD Lace',
-    price: 340,
+    name: 'Caftan Brodé Sénégalais — Blanc Nacré',
+    price: 42000,
     badge: '',
-    img: 'assets/product_wig1.png',
-    collection: 'raw'
+    img: 'assets/collection_robes.png',
+    collection: 'robes'
   }
 ];
 
-const BALAYAGE_PRODUCTS = [
+const CHEVEUX_PRODUCTS = [
   {
     id: 21,
-    name: 'Being Blonde',
-    price: 390,
-    badge: 'New',
-    img: 'assets/product_wig2.png'
+    name: 'Tresses Synthétiques — Noir Naturel',
+    price: 5000,
+    badge: 'Nouveau',
+    img: 'assets/collection_cheveux.png'
   },
   {
     id: 22,
-    name: 'Wig Cassie',
-    price: 355,
+    name: 'Mèches Lisses — Brun Chocolat 18"',
+    price: 8000,
     badge: '',
-    img: 'assets/collection_balayage.png'
+    img: 'assets/collection_cheveux.png'
   },
   {
     id: 23,
-    name: 'Blondie Wavy',
-    price: 370,
-    badge: 'Bestseller',
-    img: 'assets/product_wig1.png'
+    name: 'Perruque Ondulée — Mi-Long Noir',
+    price: 12000,
+    badge: 'Populaire',
+    img: 'assets/collection_cheveux.png'
   },
   {
     id: 24,
-    name: 'Khaleesi Unit',
-    price: 420,
-    badge: 'Exclusif',
-    img: 'assets/collection_raw.png'
+    name: 'Crochet Braids — Frisé Naturel',
+    price: 6500,
+    badge: '',
+    img: 'assets/collection_cheveux.png'
   }
 ];
 
 /* --------------------------------------------------------------------------
-   Cart State
+   Panier
    -------------------------------------------------------------------------- */
 let cart = [];
 
@@ -116,8 +117,12 @@ function getCartTotal() {
   return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 }
 
+function formatPrice(n) {
+  return n.toLocaleString('fr-FR') + ' FCFA';
+}
+
 function addToCart(productId) {
-  const product = [...PRODUCTS, ...BALAYAGE_PRODUCTS].find(p => p.id === productId);
+  const product = [...PRODUCTS, ...CHEVEUX_PRODUCTS].find(p => p.id === productId);
   if (!product) return;
 
   const existing = cart.find(i => i.id === productId);
@@ -144,21 +149,21 @@ function updateCartUI() {
       <div class="cart-empty">
         <div class="cart-empty-icon">🛍️</div>
         <p>Votre panier est vide.</p>
-        <a href="#produits" class="btn btn-gold" onclick="closeCart()">Commencer à Shopper</a>
+        <a href="#produits" class="btn btn-gold" onclick="closeCart()">Commencer vos Achats</a>
       </div>`;
     footer.style.display = 'none';
     return;
   }
 
   footer.style.display = 'block';
-  totalEl.textContent = getCartTotal().toLocaleString('fr-FR') + ' €';
+  totalEl.textContent = formatPrice(getCartTotal());
 
   body.innerHTML = cart.map(item => `
     <div class="cart-item">
       <img src="${item.img}" alt="${item.name}" class="cart-item-img" />
       <div class="cart-item-info">
         <p class="cart-item-name">${item.name}</p>
-        <p class="cart-item-price">${item.price} €</p>
+        <p class="cart-item-price">${formatPrice(item.price)}</p>
         <div class="cart-item-controls">
           <button onclick="changeQty(${item.id}, -1)">−</button>
           <span>${item.qty}</span>
@@ -184,7 +189,7 @@ function removeFromCart(id) {
 }
 
 /* --------------------------------------------------------------------------
-   Cart Drawer Toggle
+   Tiroir Panier
    -------------------------------------------------------------------------- */
 function openCart() {
   document.getElementById('cartDrawer').classList.add('active');
@@ -201,7 +206,7 @@ function closeCart() {
 document.getElementById('cartBtn').addEventListener('click', openCart);
 
 /* --------------------------------------------------------------------------
-   Mobile Nav
+   Navigation Mobile
    -------------------------------------------------------------------------- */
 function openMobileMenu() {
   document.getElementById('mobileOverlay').classList.add('active');
@@ -217,7 +222,7 @@ document.getElementById('hamburger').addEventListener('click', openMobileMenu);
 document.getElementById('overlayClose').addEventListener('click', closeMobileMenu);
 
 /* --------------------------------------------------------------------------
-   Hero Slider
+   Diaporama Héro
    -------------------------------------------------------------------------- */
 let currentSlide = 0;
 let sliderInterval;
@@ -254,7 +259,7 @@ function resetSliderTimer() {
 startSliderTimer();
 
 /* --------------------------------------------------------------------------
-   Render Products
+   Rendu des Produits
    -------------------------------------------------------------------------- */
 function createProductCard(product) {
   return `
@@ -268,24 +273,24 @@ function createProductCard(product) {
       </div>
       <div class="product-info">
         <p class="product-name">${product.name}</p>
-        <p class="product-price">${product.price} €</p>
+        <p class="product-price">${formatPrice(product.price)}</p>
       </div>
     </div>
   `;
 }
 
 document.getElementById('productsGrid').innerHTML = PRODUCTS.map(createProductCard).join('');
-document.getElementById('balayageGrid').innerHTML = BALAYAGE_PRODUCTS.map(createProductCard).join('');
+document.getElementById('cheveuxGrid').innerHTML = CHEVEUX_PRODUCTS.map(createProductCard).join('');
 
 /* --------------------------------------------------------------------------
-   Reveal on Scroll (Intersection Observer)
-   Registered AFTER products are injected so dynamic cards are included
+   Animation au Défilement (Intersection Observer)
+   Enregistré APRÈS l'injection des produits
    -------------------------------------------------------------------------- */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      observer.unobserve(entry.target); // stop observing once visible
+      observer.unobserve(entry.target);
     }
   });
 }, { threshold: 0.08 });
@@ -296,7 +301,7 @@ document.querySelectorAll('.product-card, .collection-card, .testimonial-card, .
 });
 
 /* --------------------------------------------------------------------------
-   Header Scroll Effect
+   Effet de Défilement de l'En-tête
    -------------------------------------------------------------------------- */
 window.addEventListener('scroll', () => {
   const header = document.getElementById('mainHeader');
@@ -308,7 +313,7 @@ window.addEventListener('scroll', () => {
 });
 
 /* --------------------------------------------------------------------------
-   Toast Notification
+   Notification
    -------------------------------------------------------------------------- */
 function showToast(message) {
   const toast = document.getElementById('toast');
@@ -324,13 +329,13 @@ function subscribeNewsletter(e) {
   e.preventDefault();
   const email = document.getElementById('newsletterEmail').value;
   if (email) {
-    showToast(`💌 Bienvenue dans le cercle SooWigs, ${email} !`);
+    showToast(`💌 Bienvenue dans la communauté SonaD, ${email} !`);
     document.getElementById('newsletterEmail').value = '';
   }
 }
 
 /* --------------------------------------------------------------------------
-   Keyboard & Accessibility
+   Clavier & Accessibilité
    -------------------------------------------------------------------------- */
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {

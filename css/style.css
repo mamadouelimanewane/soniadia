@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SooWigs Premium Design System
+   SonaD Premium Design System — Mode Femme & Tissus — Dakar, Sénégal
    ========================================================================== */
 
 :root {
@@ -160,11 +160,11 @@ img {
   font-weight: 700;
 }
 
-.logo-soo {
+.logo-sona {
   color: var(--primary);
 }
 
-.logo-wigs {
+.logo-d {
   color: var(--secondary);
   font-style: italic;
 }
