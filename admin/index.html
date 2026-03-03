@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SooWigs Admin — Backoffice</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="css/admin.css" />
+</head>
+
+<body>
+
+    <!-- ======================= LOGIN SCREEN ======================= -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="login-logo">
+                <span class="logo-soo">Soo</span><span class="logo-wigs">Wigs</span>
+                <span class="login-admin-badge">Admin</span>
+            </div>
+            <h1 class="login-title">Espace Administration</h1>
+            <p class="login-sub">Connectez-vous pour gérer votre boutique</p>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Adresse email</label>
+                    <input type="email" id="loginEmail" value="admin@soowigs.com" required autocomplete="email" />
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe</label>
+                    <div class="password-wrap">
+                        <input type="password" id="loginPassword" value="soowigs2026" required
+                            autocomplete="current-password" />
+                        <button type="button" class="toggle-pw" id="togglePw"
+                            aria-label="Afficher le mot de passe">👁</button>
+                    </div>
+                </div>
+                <div class="login-error" id="loginError"></div>
+                <button type="submit" class="btn-login">Se connecter</button>
+            </form>
+            <p class="login-hint">Identifiants : admin@soowigs.com / soowigs2026</p>
+        </div>
+    </div>
+
+    <!-- ======================= ADMIN APP ======================= -->
+    <div class="admin-app" id="adminApp" style="display:none">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <span class="logo-soo">Soo</span><span class="logo-wigs">Wigs</span>
+                <span class="sidebar-badge">Admin</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">📊</span> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-page="products">
+                    <span class="nav-icon">💎</span> Produits
+                </a>
+                <a href="#" class="nav-item" data-page="orders">
+                    <span class="nav-icon">📦</span> Commandes
+                    <span class="nav-badge" id="pendingBadge">0</span>
+                </a>
+                <a href="#" class="nav-item" data-page="customers">
+                    <span class="nav-icon">👥</span> Clients
+                </a>
+                <a href="#" class="nav-item" data-page="collections">
+                    <span class="nav-icon">🗂️</span> Collections
+                </a>
+                <a href="#" class="nav-item" data-page="analytics">
+                    <span class="nav-icon">📈</span> Analytiques
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <span class="nav-icon">⚙️</span> Paramètres
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../index.html" target="_blank" class="view-site-btn">🌐 Voir le site</a>
+                <button class="logout-btn" id="logoutBtn">← Déconnexion</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content" id="mainContent">
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+                <button class="topbar-menu" id="sidebarToggle" aria-label="Menu">☰</button>
+                <div class="topbar-title" id="topbarTitle">Dashboard</div>
+                <div class="topbar-actions">
+                    <div class="topbar-search">
+                        <input type="text" placeholder="Rechercher…" id="globalSearch" />
+                    </div>
+                    <div class="admin-avatar">A</div>
+                </div>
+            </header>
+
+            <!-- ===== PAGE: DASHBOARD ===== -->
+            <section class="page active" id="page-dashboard">
+                <div class="page-header">
+                    <h2>Tableau de Bord</h2>
+                    <p class="page-sub" id="dashboardDate"></p>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon gold">💰</div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Chiffre d'affaires</span>
+                            <span class="kpi-value" id="kpiRevenue">€ 0</span>
+                            <span class="kpi-trend up">+12.4% ce mois</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon blue">📦</div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Commandes</span>
+                            <span class="kpi-value" id="kpiOrders">0</span>
+                            <span class="kpi-trend up">+8.1% ce mois</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon green">👥</div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Clients</span>
+                            <span class="kpi-value" id="kpiCustomers">0</span>
+                            <span class="kpi-trend up">+5.3% ce mois</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon purple">💎</div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Produits en stock</span>
+                            <span class="kpi-value" id="kpiProducts">0</span>
+                            <span class="kpi-trend neutral">Stable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts row -->
+                <div class="charts-row">
+                    <div class="chart-card wide">
+                        <div class="chart-header">
+                            <h3>Revenus — 6 derniers mois</h3>
+                            <span class="chart-legend gold">● Revenus</span>
+                        </div>
+                        <canvas id="revenueChart" height="100"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Ventes par collection</h3>
+                        </div>
+                        <canvas id="collectionChart" height="200"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="dashboard-section">
+                    <div class="section-head">
+                        <h3>Commandes Récentes</h3>
+                        <button class="btn-link" data-page="orders">Voir tout →</button>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="data-table" id="dashRecentOrders">
+                            <thead>
+                                <tr>
+                                    <th>Référence</th>
+                                    <th>Cliente</th>
+                                    <th>Produit</th>
+                                    <th>Montant</th>
+                                    <th>Statut</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashRecentOrdersBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Top Products -->
+                <div class="dashboard-section">
+                    <div class="section-head">
+                        <h3>Produits les Plus Vendus</h3>
+                    </div>
+                    <div class="top-products-list" id="topProductsList"></div>
+                </div>
+            </section>
+
+            <!-- ===== PAGE: PRODUCTS ===== -->
+            <section class="page" id="page-products">
+                <div class="page-header">
+                    <h2>Gestion des Produits</h2>
+                    <button class="btn-primary" id="openAddProduct">+ Ajouter un produit</button>
+                </div>
+                <div class="filters-bar">
+                    <input type="text" class="filter-input" id="productSearch"
+                        placeholder="🔍 Rechercher un produit…" />
+                    <select class="filter-select" id="productCollFilter">
+                        <option value="">Toutes les collections</option>
+                        <option value="brown">Brown Girls</option>
+                        <option value="balayage">Balayage</option>
+                        <option value="raw">Raw Vietnamese</option>
+                        <option value="indian">Indian Hair</option>
+                        <option value="vietnamese">Vietnamese Virgin</option>
+                    </select>
+                    <select class="filter-select" id="productSortFilter">
+                        <option value="newest">Plus récents</option>
+                        <option value="price-asc">Prix croissant</option>
+                        <option value="price-desc">Prix décroissant</option>
+                        <option value="name">Nom A-Z</option>
+                    </select>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table" id="productsTable">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Nom</th>
+                                <th>Collection</th>
+                                <th>Prix</th>
+                                <th>Stock</th>
+                                <th>Badge</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ===== PAGE: ORDERS ===== -->
+            <section class="page" id="page-orders">
+                <div class="page-header">
+                    <h2>Gestion des Commandes</h2>
+                    <button class="btn-primary" id="openAddOrder">+ Nouvelle commande</button>
+                </div>
+                <div class="filters-bar">
+                    <input type="text" class="filter-input" id="orderSearch"
+                        placeholder="🔍 Rechercher commande, client…" />
+                    <select class="filter-select" id="orderStatusFilter">
+                        <option value="">Tous les statuts</option>
+                        <option value="pending">En attente</option>
+                        <option value="processing">En traitement</option>
+                        <option value="shipped">Expédiée</option>
+                        <option value="delivered">Livrée</option>
+                        <option value="cancelled">Annulée</option>
+                    </select>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Réf.</th>
+                                <th>Cliente</th>
+                                <th>Produits</th>
+                                <th>Total</th>
+                                <th>Statut</th>
+                                <th>Pays</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ===== PAGE: CUSTOMERS ===== -->
+            <section class="page" id="page-customers">
+                <div class="page-header">
+                    <h2>Gestion des Clients</h2>
+                    <button class="btn-primary" id="openAddCustomer">+ Nouveau client</button>
+                </div>
+                <div class="filters-bar">
+                    <input type="text" class="filter-input" id="customerSearch"
+                        placeholder="🔍 Rechercher un client…" />
+                    <select class="filter-select" id="customerCountryFilter">
+                        <option value="">Tous les pays</option>
+                        <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                        <option value="France">France</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Sénégal">Sénégal</option>
+                        <option value="Cameroun">Cameroun</option>
+                        <option value="Canada">Canada</option>
+                    </select>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Pays</th>
+                                <th>Commandes</th>
+                                <th>Total dépensé</th>
+                                <th>Inscrit le</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ===== PAGE: COLLECTIONS ===== -->
+            <section class="page" id="page-collections">
+                <div class="page-header">
+                    <h2>Gestion des Collections</h2>
+                    <button class="btn-primary" id="openAddCollection">+ Nouvelle collection</button>
+                </div>
+                <div class="collections-admin-grid" id="collectionsAdminGrid"></div>
+            </section>
+
+            <!-- ===== PAGE: ANALYTICS ===== -->
+            <section class="page" id="page-analytics">
+                <div class="page-header">
+                    <h2>Analytiques</h2>
+                </div>
+                <div class="analytics-grid">
+                    <div class="chart-card wide">
+                        <div class="chart-header">
+                            <h3>Commandes par jour (30 derniers jours)</h3>
+                        </div>
+                        <canvas id="ordersChart" height="80"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Répartition géographique</h3>
+                        </div>
+                        <canvas id="geoChart" height="250"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Méthodes de paiement</h3>
+                        </div>
+                        <canvas id="payChart" height="250"></canvas>
+                    </div>
+                    <div class="chart-card wide">
+                        <div class="chart-header">
+                            <h3>Revenus & Commandes comparatifs (12 mois)</h3>
+                        </div>
+                        <canvas id="compareChart" height="80"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== PAGE: SETTINGS ===== -->
+            <section class="page" id="page-settings">
+                <div class="page-header">
+                    <h2>Paramètres de la Boutique</h2>
+                </div>
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>🏪 Informations Boutique</h3>
+                        <div class="form-group"><label>Nom de la boutique</label><input type="text" value="SooWigs" />
+                        </div>
+                        <div class="form-group"><label>Email de contact</label><input type="email"
+                                value="contact@soowigs.com" /></div>
+                        <div class="form-group"><label>Téléphone</label><input type="tel" value="+33 6 00 00 00 00" />
+                        </div>
+                        <div class="form-group"><label>Pays d'expédition principal</label>
+                            <select>
+                                <option>France</option>
+                                <option>Côte d'Ivoire</option>
+                                <option>Ghana</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary">Sauvegarder</button>
+                    </div>
+                    <div class="settings-card">
+                        <h3>💰 Paramètres de Prix</h3>
+                        <div class="form-group"><label>Devise</label>
+                            <select>
+                                <option>EUR (€)</option>
+                                <option>USD ($)</option>
+                                <option>GBP (£)</option>
+                                <option>XOF (FCFA)</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Frais de livraison standard</label><input type="number"
+                                value="15" /></div>
+                        <div class="form-group"><label>Seuil livraison gratuite (€)</label><input type="number"
+                                value="150" /></div>
+                        <div class="form-group"><label>TVA (%)</label><input type="number" value="20" /></div>
+                        <button class="btn-primary">Sauvegarder</button>
+                    </div>
+                    <div class="settings-card">
+                        <h3>🔐 Sécurité Admin</h3>
+                        <div class="form-group"><label>Email administrateur</label><input type="email"
+                                value="admin@soowigs.com" /></div>
+                        <div class="form-group"><label>Nouveau mot de passe</label><input type="password"
+                                placeholder="••••••••" /></div>
+                        <div class="form-group"><label>Confirmer le mot de passe</label><input type="password"
+                                placeholder="••••••••" /></div>
+                        <button class="btn-primary">Mettre à jour</button>
+                    </div>
+                    <div class="settings-card">
+                        <h3>📣 Notifications</h3>
+                        <div class="toggle-setting">
+                            <span>Nouvelle commande</span>
+                            <label class="toggle-switch"><input type="checkbox" checked /><span
+                                    class="slider"></span></label>
+                        </div>
+                        <div class="toggle-setting">
+                            <span>Stock bas (&lt; 5 unités)</span>
+                            <label class="toggle-switch"><input type="checkbox" checked /><span
+                                    class="slider"></span></label>
+                        </div>
+                        <div class="toggle-setting">
+                            <span>Nouvel abonné newsletter</span>
+                            <label class="toggle-switch"><input type="checkbox" /><span class="slider"></span></label>
+                        </div>
+                        <div class="toggle-setting">
+                            <span>Avis client reçu</span>
+                            <label class="toggle-switch"><input type="checkbox" checked /><span
+                                    class="slider"></span></label>
+                        </div>
+                        <button class="btn-primary" style="margin-top:20px">Sauvegarder</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ===== MODALS ===== -->
+
+    <!-- Modal: Product Form -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Ajouter un produit</h3>
+                <button class="modal-close" data-close="productModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="productId" />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nom du produit *</label>
+                            <input type="text" id="productName" required placeholder="ex: Bone Straight 26&quot;" />
+                        </div>
+                        <div class="form-group">
+                            <label>Prix (€) *</label>
+                            <input type="number" id="productPrice" required min="1" placeholder="299" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Collection *</label>
+                            <select id="productCollection" required>
+                                <option value="">-- Choisir --</option>
+                                <option value="brown">Brown Girls</option>
+                                <option value="balayage">Balayage</option>
+                                <option value="raw">Raw Vietnamese</option>
+                                <option value="indian">Indian Hair</option>
+                                <option value="vietnamese">Vietnamese Virgin</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Badge</label>
+                            <select id="productBadge">
+                                <option value="">Aucun</option>
+                                <option value="Bestseller">Bestseller</option>
+                                <option value="Nouveau">Nouveau</option>
+                                <option value="Tendance">Tendance</option>
+                                <option value="Populaire">Populaire</option>
+                                <option value="Exclusif">Exclusif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Stock (unités)</label>
+                            <input type="number" id="productStock" min="0" value="10" />
+                        </div>
+                        <div class="form-group">
+                            <label>Statut</label>
+                            <select id="productStatus">
+                                <option value="active">Actif</option>
+                                <option value="draft">Brouillon</option>
+                                <option value="archived">Archivé</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>URL Image</label>
+                        <input type="text" id="productImg" placeholder="../assets/product_wig1.png" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" data-close="productModal">Annuler</button>
+                        <button type="submit" class="btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Order Form -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="orderModalTitle">Détail de la commande</h3>
+                <button class="modal-close" data-close="orderModal">✕</button>
+            </div>
+            <div class="modal-body" id="orderModalBody">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Customer Form -->
+    <div class="modal-overlay" id="customerModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="customerModalTitle">Ajouter un client</h3>
+                <button class="modal-close" data-close="customerModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="customerForm">
+                    <input type="hidden" id="customerId" />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Prénom *</label>
+                            <input type="text" id="customerFirst" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Nom *</label>
+                            <input type="text" id="customerLast" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="customerEmail" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Pays</label>
+                            <select id="customerCountry">
+                                <option>France</option>
+                                <option>Côte d'Ivoire</option>
+                                <option>Ghana</option>
+                                <option>Sénégal</option>
+                                <option>Cameroun</option>
+                                <option>Canada</option>
+                                <option>Belgique</option>
+                                <option>USA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Téléphone</label>
+                        <input type="tel" id="customerPhone" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" data-close="customerModal">Annuler</button>
+                        <button type="submit" class="btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3>Confirmation</h3>
+                <button class="modal-close" data-close="confirmModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Êtes-vous sûr de vouloir supprimer cet élément ?</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="confirmModal">Annuler</button>
+                    <button type="button" class="btn-danger" id="confirmOk">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="admin-toast" id="adminToast"></div>
+
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

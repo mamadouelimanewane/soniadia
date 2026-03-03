@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SooWigs — Luxury Hair, Your Crown Your Rules</title>
+  <meta name="description"
+    content="SooWigs offre des perruques et extensions de cheveux de luxe 100% humains. Fullness, glamour et qualité garantie. Livraison mondiale." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- ======================== ANNOUNCEMENT BAR ======================== -->
+  <div class="announcement-bar" id="announcementBar">
+    <div class="announcement-slider">
+      <span>✨ Livraison Mondiale Gratuite dès 150€ &nbsp;&nbsp;|&nbsp;&nbsp; 🔥 Collection Brown Girls — Disponible
+        Maintenant &nbsp;&nbsp;|&nbsp;&nbsp; 💎 Cheveux 100% Humains Garantis</span>
+      <span>✨ Livraison Mondiale Gratuite dès 150€ &nbsp;&nbsp;|&nbsp;&nbsp; 🔥 Collection Brown Girls — Disponible
+        Maintenant &nbsp;&nbsp;|&nbsp;&nbsp; 💎 Cheveux 100% Humains Garantis</span>
+    </div>
+    <button class="announcement-close" onclick="this.parentElement.style.display='none'">✕</button>
+  </div>
+
+  <!-- ======================== HEADER ======================== -->
+  <header class="header" id="mainHeader">
+    <div class="header-inner">
+      <!-- Hamburger (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <span class="logo-soo">Soo</span><span class="logo-wigs">Wigs</span>
+      </a>
+
+      <!-- Nav -->
+      <nav class="nav" id="mainNav">
+        <a href="#collections" class="nav-link">Collections</a>
+        <a href="#produits" class="nav-link">Produits</a>
+        <a href="#brown-girls" class="nav-link">Brown Girls</a>
+        <a href="#balayage" class="nav-link">Balayage</a>
+        <a href="#apropos" class="nav-link">À Propos</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="header-actions">
+        <button class="icon-btn" id="searchBtn" aria-label="Rechercher">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+        </button>
+        <button class="icon-btn" aria-label="Compte">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </button>
+        <button class="icon-btn cart-btn" id="cartBtn" aria-label="Panier">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <button class="overlay-close" id="overlayClose" aria-label="Fermer le menu">✕</button>
+    <a class="logo" href="#">
+      <span class="logo-soo">Soo</span><span class="logo-wigs">Wigs</span>
+    </a>
+    <nav class="mobile-nav">
+      <a href="#collections" class="mobile-nav-link" onclick="closeMobileMenu()">Collections</a>
+      <a href="#produits" class="mobile-nav-link" onclick="closeMobileMenu()">Produits</a>
+      <a href="#brown-girls" class="mobile-nav-link" onclick="closeMobileMenu()">Brown Girls</a>
+      <a href="#balayage" class="mobile-nav-link" onclick="closeMobileMenu()">Balayage</a>
+      <a href="#apropos" class="mobile-nav-link" onclick="closeMobileMenu()">À Propos</a>
+    </nav>
+  </div>
+
+  <!-- ======================== HERO ======================== -->
+  <section class="hero" id="hero">
+    <div class="hero-slides">
+      <div class="hero-slide active" style="background-image: url('assets/hero_banner.png')">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="hero-eyebrow">Nouveauté — Collection Signature</p>
+          <h1 class="hero-title">Votre Couronne,<br /><em>Vos Règles.</em></h1>
+          <p class="hero-sub">Des perruques luxueuses 100% cheveux humains,<br />pensées pour les femmes qui exigent
+            l'excellence.</p>
+          <div class="hero-actions">
+            <a href="#produits" class="btn btn-gold">Découvrir la Collection</a>
+            <a href="#collections" class="btn btn-outline-light">Nos Collections</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-slide" style="background-image: url('assets/collection_brown.png')">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="hero-eyebrow">Nouveau Drop</p>
+          <h1 class="hero-title">Brown Girls<br /><em>Collection</em></h1>
+          <p class="hero-sub">Caramel Brown · Coco Brown · Caviar Silk</p>
+          <div class="hero-actions">
+            <a href="#brown-girls" class="btn btn-gold">Voir la Collection</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-slide" style="background-image: url('assets/collection_balayage.png')">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="hero-eyebrow">Incontournable</p>
+          <h1 class="hero-title">Collection<br /><em>Balayage</em></h1>
+          <p class="hero-sub">Des dégradés somptueux qui font tourner les têtes.</p>
+          <div class="hero-actions">
+            <a href="#balayage" class="btn btn-gold">Shopper Balayage</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Slide Controls -->
+    <div class="hero-controls" role="tablist" aria-label="Navigation du diaporama">
+      <button class="hero-dot active" onclick="goToSlide(0)" aria-label="Diapositive 1" role="tab"></button>
+      <button class="hero-dot" onclick="goToSlide(1)" aria-label="Diapositive 2" role="tab"></button>
+      <button class="hero-dot" onclick="goToSlide(2)" aria-label="Diapositive 3" role="tab"></button>
+    </div>
+    <button class="hero-arrow left" onclick="prevSlide()" aria-label="Diapositive précédente">&#8249;</button>
+    <button class="hero-arrow right" onclick="nextSlide()" aria-label="Diapositive suivante">&#8250;</button>
+  </section>
+
+  <!-- ======================== FEATURE BAR ======================== -->
+  <section class="feature-bar">
+    <div class="container">
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🌍</div>
+          <div>
+            <strong>Livraison Mondiale</strong>
+            <span>Expédition rapide partout</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💎</div>
+          <div>
+            <strong>Cheveux Bruts</strong>
+            <span>100% Human Hair Raw</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">👑</div>
+          <div>
+            <strong>+1000 Perruques Vendues</strong>
+            <span>Rejoignez nos clientes satisfaites</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✨</div>
+          <div>
+            <strong>Luxe Garanti</strong>
+            <span>Qualité premium authentique</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== COLLECTIONS ======================== -->
+  <section class="section collections-section" id="collections">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Nos Univers</p>
+        <h2 class="section-title">Shop by Collection</h2>
+      </div>
+      <div class="collections-grid">
+        <div class="collection-card big">
+          <img src="assets/collection_brown.png" alt="Brown Girls Collection" loading="lazy" />
+          <div class="collection-card-overlay">
+            <h3>Brown Girls</h3>
+            <a href="#brown-girls" class="btn btn-gold-sm">Découvrir</a>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/collection_balayage.png" alt="Balayage Collection" loading="lazy" />
+          <div class="collection-card-overlay">
+            <h3>Balayage</h3>
+            <a href="#balayage" class="btn btn-gold-sm">Découvrir</a>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/collection_raw.png" alt="Raw Vietnamese Hair" loading="lazy" />
+          <div class="collection-card-overlay">
+            <h3>Cheveux Bruts Vietnamiens</h3>
+            <a href="#produits" class="btn btn-gold-sm">Découvrir</a>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/hero_banner.png" alt="Indian Hair" loading="lazy" />
+          <div class="collection-card-overlay">
+            <h3>Indian Hair</h3>
+            <a href="#produits" class="btn btn-gold-sm">Découvrir</a>
+          </div>
+        </div>
+        <div class="collection-card">
+          <img src="assets/product_wig2.png" alt="Vietnamese Virgin" loading="lazy" />
+          <div class="collection-card-overlay">
+            <h3>Vietnamese Virgin</h3>
+            <a href="#produits" class="btn btn-gold-sm">Découvrir</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== LUXURY BANNER ======================== -->
+  <section class="luxury-banner">
+    <div class="luxury-banner-content">
+      <p class="luxury-eyebrow">Pure Hair Lustre</p>
+      <h2>Luxury Hair.<br />De la Racine<br />à la Pointe.</h2>
+      <a href="#produits" class="btn btn-gold">Shop Now</a>
+    </div>
+    <div class="luxury-banner-img">
+      <img src="assets/collection_raw.png" alt="Luxury Hair SooWigs" />
+    </div>
+  </section>
+
+  <!-- ======================== FEATURED PRODUCTS ======================== -->
+  <section class="section" id="produits">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Notre Sélection</p>
+        <h2 class="section-title">Produits Vedettes</h2>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <!-- Products injected by JS -->
+      </div>
+      <div class="cta-center">
+        <a href="#" class="btn btn-dark">Voir Tous les Produits</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== BROWN GIRLS ======================== -->
+  <section class="section brown-section" id="brown-girls">
+    <div class="container">
+      <div class="brown-inner">
+        <div class="brown-text">
+          <p class="section-eyebrow light">Nouveau Drop ✨</p>
+          <h2 class="section-title light">The Brown Girls<br />Collection</h2>
+          <p class="brown-desc">Trois teintes soigneusement sélectionnées pour sublimer toutes les carnations. Du plus
+            chaud au plus profond.</p>
+          <div class="brown-shades">
+            <div class="shade-item">
+              <div class="shade-dot" style="background: #C68B3B;"></div>
+              <span>Caramel Brown</span>
+            </div>
+            <div class="shade-item">
+              <div class="shade-dot" style="background: #5C3317;"></div>
+              <span>Coco Brown</span>
+            </div>
+            <div class="shade-item">
+              <div class="shade-dot" style="background: #1A0A00;"></div>
+              <span>Caviar Silk</span>
+            </div>
+          </div>
+          <a href="#produits" class="btn btn-gold">Shopper la Collection</a>
+        </div>
+        <div class="brown-img">
+          <img src="assets/collection_brown.png" alt="Brown Girls Collection SooWigs" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== BALAYAGE ======================== -->
+  <section class="section" id="balayage">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Couleur &amp; Glamour</p>
+        <h2 class="section-title">Collection Balayage</h2>
+      </div>
+      <div class="balayage-grid" id="balayageGrid">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== HOW-TO BANNER ======================== -->
+  <section class="howto-banner">
+    <div class="howto-content">
+      <h2>Bouclez Vos Cheveux<br /><em>Comme Une Pro.</em></h2>
+      <p>Nos cheveux bruts tiennent les boucles parfaitement — vous verrez la différence.</p>
+      <a href="#produits" class="btn btn-gold">Trouver Mon Look</a>
+    </div>
+  </section>
+
+  <!-- ======================== TESTIMONIALS ======================== -->
+  <section class="section testimonials-section" id="apropos">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Elles adorent 💕</p>
+        <h2 class="section-title">Les Clientes Parlent</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"La plus belle perruque que j'ai jamais portée ! Si douce, si naturelle. Je ne changerai pour rien au
+            monde."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">A</div>
+            <div>
+              <strong>Aminata D.</strong>
+              <span>Abidjan, Côte d'Ivoire</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card featured">
+          <div class="stars">★★★★★</div>
+          <p>"Tellement douce et magnifique ! La qualité est incomparable — j'en suis à ma 3ème commande chez SooWigs !"
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">F</div>
+            <div>
+              <strong>Fatou N.</strong>
+              <span>Paris, France</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Pleine et impeccable ! Tous les compliments à chaque fois que je la porte. Livraison ultra rapide !"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">S</div>
+            <div>
+              <strong>Sophia K.</strong>
+              <span>Accra, Ghana</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== NEWSLETTER ======================== -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="newsletter-text">
+          <h2>Rejoignez le Cercle SooWigs</h2>
+          <p>Offres exclusives, nouveaux drops, conseils beauté — directement dans votre boîte mail.</p>
+        </div>
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+          <input type="email" id="newsletterEmail" placeholder="Votre adresse email" required />
+          <button type="submit" class="btn btn-gold">S'abonner</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo footer-logo">
+            <span class="logo-soo">Soo</span><span class="logo-wigs">Wigs</span>
+          </a>
+          <p>Des perruques et extensions de cheveux 100% humains d'une qualité luxueuse. Votre couronne, vos règles.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram" class="social-link">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </a>
+            <a href="#" aria-label="TikTok" class="social-link">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path
+                  d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.26 8.26 0 004.84 1.55V6.85a4.85 4.85 0 01-1.07-.16z" />
+              </svg>
+            </a>
+            <a href="#" aria-label="Facebook" class="social-link">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Service Client</h4>
+          <ul>
+            <li><a href="#">Contactez-nous</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Politique de Retour</a></li>
+            <li><a href="#">Suivi de Commande</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Cheveux de Luxe</h4>
+          <ul>
+            <li><a href="#">Collection Brown Girls</a></li>
+            <li><a href="#">Collection Balayage</a></li>
+            <li><a href="#">Indian Hair</a></li>
+            <li><a href="#">Vietnamese Raw</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>SooWigs</h4>
+          <ul>
+            <li><a href="#">Notre Histoire</a></li>
+            <li><a href="#">Blog Beauté</a></li>
+            <li><a href="#">Programme VIP</a></li>
+            <li><a href="#">Affiliation</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 SooWigs. Tous droits réservés. &nbsp;|&nbsp; Conçu avec 💛 pour les femmes d'exception.</p>
+        <div class="payment-icons">
+          <span class="pay-badge">VISA</span>
+          <span class="pay-badge">Mastercard</span>
+          <span class="pay-badge">PayPal</span>
+          <span class="pay-badge">Apple Pay</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================== CART DRAWER ======================== -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Mon Panier</h3>
+      <button onclick="closeCart()" class="cart-close">✕</button>
+    </div>
+    <div class="cart-body" id="cartBody">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛍️</div>
+        <p>Votre panier est vide.</p>
+        <a href="#produits" class="btn btn-gold" onclick="closeCart()">Commencer à Shopper</a>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="cartTotal">0 €</strong>
+      </div>
+      <button class="btn btn-gold btn-full">Passer la Commande</button>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
